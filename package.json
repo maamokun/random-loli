@@ -2,7 +2,7 @@
   "name": "randomloli",
   "type": "module",
   "scripts": {
-    "dev": "bun run --watch src/main.ts",
+    "dev": "bun run --watch src/index.ts",
     "typecheck": "tsc",
     "format": "oxfmt"
   },
