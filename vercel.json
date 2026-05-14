@@ -1,10 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "bunVersion": "1.x",
-  "builds": [
-    {
-      "src": "src/main.tsx",
-      "use": "@vercel/node"
-    }
-  ]
+  "bunVersion": "1.x"
 }
