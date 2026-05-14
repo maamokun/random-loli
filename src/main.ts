@@ -20,28 +20,24 @@ app.get("/", async () => {
   const loli = await getRandomLoli(false);
   const originalUrl = await getOriginalImg(loli);
   const proxiedUrl = originalUrl.url.replace("https://i.pximg.net/", "");
-  return (
-    <Page
-      title={originalUrl.title}
-      imageUrl={`/pximg/${proxiedUrl}`}
-      username={originalUrl.user}
-      userId={originalUrl.userId}
-    />
-  );
+  return createElement(Page, {
+    title: originalUrl.title,
+    imageUrl: `/pximg/${proxiedUrl}`,
+    username: originalUrl.user,
+    userId: originalUrl.userId,
+  });
 });
 
 app.get("/r18", async () => {
   const loli = await getRandomLoli(true);
   const originalUrl = await getOriginalImg(loli);
   const proxiedUrl = originalUrl.url.replace("https://i.pximg.net/", "");
-  return (
-    <Page
-      title={originalUrl.title}
-      imageUrl={`/pximg/${proxiedUrl}`}
-      username={originalUrl.user}
-      userId={originalUrl.userId}
-    />
-  );
+  return createElement(Page, {
+    title: originalUrl.title,
+    imageUrl: `/pximg/${proxiedUrl}`,
+    username: originalUrl.user,
+    userId: originalUrl.userId,
+  });
 });
 
 export default app;
