@@ -7,22 +7,22 @@ const app = new Elysia();
 
 app.use(html());
 
-app.get("/pximg/*", async ({ params }) => {
-  const data = await getPxImg(params["*"]);
-  return new Response(data, {
-    headers: {
-      "Content-Type": "image/jpeg",
-    },
-  });
-});
+const fetchImageAsDataUri = async (url: string): Promise<string> => {
+  const path = url.replace("https://i.pximg.net/", "");
+  const imageBuffer = await getPxImg(path);
+  const ext = url.split(".").pop()?.toLowerCase() ?? "jpeg";
+  const mimeType = ext === "png" ? "image/png" : ext === "gif" ? "image/gif" : "image/jpeg";
+  const base64 = imageBuffer.toString("base64");
+  return `data:${mimeType};base64,${base64}`;
+};
 
 app.get("/", async () => {
   const loli = await getRandomLoli(false);
   const originalUrl = await getOriginalImg(loli);
-  const proxiedUrl = originalUrl.url.replace("https://i.pximg.net/", "");
+  const dataUri = await fetchImageAsDataUri(originalUrl.url);
   return createElement(Page, {
     title: originalUrl.title,
-    imageUrl: `/pximg/${proxiedUrl}`,
+    imageUrl: dataUri,
     username: originalUrl.user,
     userId: originalUrl.userId,
   });
@@ -31,10 +31,10 @@ app.get("/", async () => {
 app.get("/r18", async () => {
   const loli = await getRandomLoli(true);
   const originalUrl = await getOriginalImg(loli);
-  const proxiedUrl = originalUrl.url.replace("https://i.pximg.net/", "");
+  const dataUri = await fetchImageAsDataUri(originalUrl.url);
   return createElement(Page, {
     title: originalUrl.title,
-    imageUrl: `/pximg/${proxiedUrl}`,
+    imageUrl: dataUri,
     username: originalUrl.user,
     userId: originalUrl.userId,
   });
