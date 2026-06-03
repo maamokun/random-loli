@@ -30,6 +30,6 @@ export const getOriginalImg = async (id: string) => {
     title: data.body.illustTitle,
     id: id,
     user: data.body.userName,
-    userId: data.userId,
+    userId: data.body.userId,
   };
 };
