@@ -14,7 +14,7 @@ export const getPxImg = async (path: string) => {
 
 export const getRandomLoli = async (r18: boolean) => {
   const search = await fetch(
-    `https://www.pixiv.net/ajax/search/artworks/%E3%83%AD%E3%83%AA?order=date_d&mode=${r18 ? "r18" : "safe"}&p=1&ai_type=0&csw=0&s_mode=s_tag&ratio=&lang=en&type=illust`,
+    `https://www.pixiv.net/ajax/search/artworks/%E3%83%AD%E3%83%AA?order=date_d&mode=${r18 ? "r18" : "safe"}&p=1&ai_type=0&csw=0&s_mode=s_tag_full&ratio=&lang=en&type=illust`,
   );
   const searchData = (await search.json()) as any;
   const entries = searchData.body.illustManga.data;
