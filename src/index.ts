@@ -40,4 +40,4 @@ app.get("/r18", async () => {
   });
 });
 
-export default app;
+app.listen(3000)
